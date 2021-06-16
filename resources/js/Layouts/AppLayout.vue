@@ -21,6 +21,10 @@
                                     Dashboard
                                 </jet-nav-link>
 
+                                <jet-nav-link :href="route('task.index')" :active="route().current('task.index')" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    Task
+                                </jet-nav-link>
+
                                 <jet-nav-link :href="route('menu')" :active="route().current('menu')" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                     Menu
                                 </jet-nav-link>
