@@ -5,8 +5,8 @@ import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { createI18n } from 'vue-i18n';
-// import CKEditor from '@ckeditor/ckeditor5-vue';
-// require('@ckeditor/ckeditor5-build-classic/build/translations/ja');
+import CKEditor from '@ckeditor/ckeditor5-vue';
+require('@ckeditor/ckeditor5-build-classic/build/translations/ja');
 
 
 const el = document.getElementById('app');
@@ -29,7 +29,7 @@ const app = createApp({
 })
 
 app.mixin({ methods: { route } })
-// app.use( CKEditor )
+app.use( CKEditor )
 app.use(InertiaPlugin)
 app.use(i18n)
 app.mount(el);
