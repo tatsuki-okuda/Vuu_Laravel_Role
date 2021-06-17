@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
 
 
@@ -14,7 +15,11 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Task/Index', ['tasks' => Task::all() ]);
+        $id = Auth::id();
+        
+        // $task = Task::with('user')->all()->paginate(20);
+        $tasks = Task::all()->where('user_id', $id);
+        return Inertia::render('Task/Index', ['tasks' => $tasks ]);
     }
 
     public function show(Task $task)
@@ -67,7 +72,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-
         return Redirect::route('task.index');
     }
 

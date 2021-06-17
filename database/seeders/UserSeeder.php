@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class TasksTableSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +13,6 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        \Event::fakeFor(function () {
-            \App\Models\Task::factory()->count(30)->create(); 
-        });
+        \App\Models\User::factory(20)->create();
     }
 }
