@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,20 @@ Route::get('/', function () {
     ]);
 });
 
+
+Route::prefix('admin')->group(function () {
+    Route::get('login', [LoginController::class, 'create'])->name('admin.login');
+    Route::post('login', [LoginController::class, 'store']);
+
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('dashboard', [AdminDashboardController::class, 'index']);
+    });
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
 
 
 Route::middleware(['auth:sanctum', 'verified'])
@@ -39,8 +52,6 @@ Route::middleware(['auth:sanctum', 'verified'])
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/edit', [InputController::class, 'edit'])
     ->name('input.edit');
-
-
 
 Route::get('menu', [MenuController::class, 'menu'])
     ->name('menu')
