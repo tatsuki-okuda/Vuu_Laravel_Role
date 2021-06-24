@@ -88,7 +88,7 @@
             JetSecondaryButton,
         },
 
-        props: ['user'],
+        props: ['user','auth'],
 
         data() {
             return {
@@ -96,6 +96,7 @@
                     _method: 'PUT',
                     name: this.user.name,
                     email: this.user.email,
+                    auth: this.auth,
                     photo: null,
                 }),
 
@@ -104,12 +105,19 @@
         },
 
         methods: {
+            postRoute(){
+                    if(this.auth === 'admin'){
+                        return route('admin-profile-information.update');
+                    } else {
+                        return route('user-profile-information.update');
+                    }
+            },
             updateProfileInformation() {
                 if (this.$refs.photo) {
                     this.form.photo = this.$refs.photo.files[0]
                 }
 
-                this.form.post(route('user-profile-information.update'), {
+                this.form.post(this.postRoute() , {
                     errorBag: 'updateProfileInformation',
                     preserveScroll: true,
                     onSuccess: () => (this.clearPhotoFileInput()),
