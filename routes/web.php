@@ -42,7 +42,7 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-                ->name('admin.dashboard');;
+                ->name('admin.dashboard');
         Route::get('/profile', [AdminProfileController::class, 'show'])
                 ->name('admin_profile.show');
 
