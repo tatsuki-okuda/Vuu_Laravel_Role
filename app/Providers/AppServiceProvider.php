@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(UrlGenerator $url)
     {
         // デプロイ時にコメント戻す
-        // $url->forceScheme('https');
+        $url->forceScheme('https');
     }
 }
