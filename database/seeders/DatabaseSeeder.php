@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use Database\Seeders\UserSeeder;
 use Database\Seeders\TasksTableSeeder;
+use Database\Seeders\AdminSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(20)->create();
         $this->call(UserSeeder::class);
         $this->call(TasksTableSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }

@@ -9,7 +9,7 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-                    <update-profile-information-form :user="$page.props.user" />
+                    <update-profile-information-form :user="$page.props.user" :auth="$page.props.auth" />
 
                     <jet-section-border />
                 </div>
@@ -48,7 +48,7 @@
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
 
     export default {
-        props: ['sessions'],
+        props: ['sessions','auth'],
 
         components: {
             AppLayout,

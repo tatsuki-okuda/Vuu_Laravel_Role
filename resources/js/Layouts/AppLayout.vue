@@ -17,15 +17,18 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                                <jet-nav-link v-if="auth!='admin'" :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Dashboard
+                                </jet-nav-link>
+                                <jet-nav-link v-else :href="route('admin.dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
 
-                                <jet-nav-link :href="route('task.index')" :active="route().current('task.index')" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link v-if="auth!='admin'" :href="route('task.index')" :active="route().current('task.index')" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                     Task
                                 </jet-nav-link>
 
-                                <jet-nav-link :href="route('menu')" :active="route().current('menu')" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link v-if="auth!='admin'" :href="route('menu')" :active="route().current('menu')" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                     Menu
                                 </jet-nav-link>
                             </div>
@@ -112,7 +115,10 @@
                                             Manage Account
                                         </div>
 
-                                        <jet-dropdown-link :href="route('profile.show')">
+                                        <jet-dropdown-link v-if="auth!='admin'" :href="route('profile.show')">
+                                            Profile
+                                        </jet-dropdown-link>
+                                        <jet-dropdown-link v-else :href="route('admin_profile.show')">
                                             Profile
                                         </jet-dropdown-link>
 
@@ -253,6 +259,10 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+        },
+
+        props: {
+            auth: String
         },
 
         data() {
