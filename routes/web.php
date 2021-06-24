@@ -3,11 +3,16 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Fortify\Features;
+
+use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
+use Laravel\Fortify\Http\Controllers\ProfileInformationController;
 
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -36,7 +41,15 @@ Route::prefix('admin')->group(function () {
     Route::post('login', [LoginController::class, 'store']);
 
     Route::middleware('auth:admin')->group(function () {
-        Route::get('dashboard', [AdminDashboardController::class, 'index']);
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+                ->name('admin.dashboard');;
+        Route::get('/profile', [AdminProfileController::class, 'show'])
+                ->name('admin_profile.show');
+
+        if (Features::enabled(Features::updateProfileInformation())) {
+            Route::put('/profile-information', [ProfileInformationController::class, 'update'])
+                ->name('admin-profile-information.update');
+        }
     });
 });
 
