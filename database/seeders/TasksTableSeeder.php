@@ -13,8 +13,8 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        \Event::fakeFor(function () {
-            \App\Models\Task::factory()->count(30)->create(); 
-        });
+        // \Event::fakeFor(function () {
+        //     \App\Models\Task::factory()->count(30)->create(); 
+        // });
     }
 }

@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::factory(20)->create();
+        // Admin::factory(20)->create();
 
         Admin::create([
             'name' => '管理者',
